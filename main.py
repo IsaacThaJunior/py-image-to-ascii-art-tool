@@ -1,9 +1,12 @@
-from func_utils import load_images, preprocess_img
+from func_utils import load_images, preprocess_img, create_ascii_art
 
 def main():
+    
+    charset_to_use = "@%#*+=-:. " # this is the default charset
 
     loaded_image = load_images("images/photo_test.avif")
-    preprocess_img(loaded_image, 5)
+    pixel_list, width = preprocess_img(loaded_image, 100)
+    create_ascii_art(pixel_list, width, charset_to_use)
     
 
 
