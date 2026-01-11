@@ -1,6 +1,8 @@
 from PIL import Image, ImageOps
 
 
+
+
 def load_images(image_path):
     # check that the image is a real one by checking if the extension
     # ends with JPG, PNG or JPEG
