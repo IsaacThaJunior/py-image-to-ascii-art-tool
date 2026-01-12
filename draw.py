@@ -1,10 +1,10 @@
-from PIL import Image, ImageOps
+from PIL import Image
 
 
 class Image_To_Ascii:
-    def __init__(self, image_path) -> None:
+    def __init__(self, image_path, target_width) -> None:
         self.image_path = image_path
-        self.target_width = 100
+        self.target_width = target_width
         self.charset = (
             r" .'`^\",:;Il!i><~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
         )
@@ -19,6 +19,7 @@ class Image_To_Ascii:
             return Image.open(self.image_path)
 
         except Exception as e:
+            print("An error occured here")
             print("Error:", e)
 
     def turn_image_to_greyscale_and_get_aspect_ratio(self):
@@ -61,7 +62,6 @@ class Image_To_Ascii:
         pixel_list_length = len(pixel_list)
         charset_length = len(self.charset)
         height = int(pixel_list_length / self.target_width)
-        print(pixel_list_length)
         ascii_char = []
         ascii_rows = []
 
@@ -77,22 +77,15 @@ class Image_To_Ascii:
             charset_to_use = self.charset[char_index]
             ascii_char.append(charset_to_use)
 
-        print("FROM HERE WE MOVE: ", len(ascii_char))
-
         for num in range(height):
             start_row = num * self.target_width
             end_row = start_row + self.target_width
 
             row_chars = ascii_char[start_row:end_row]
             row_string = "".join(row_chars)
-            print(row_string)
+            ascii_rows.append(row_string)
 
+        ascii_art = "\n".join(ascii_rows)
+        print(ascii_art)
 
-#         row_chars = ascii_chars[start_index:end_index]
-#         row_string = "".join(row_chars)
-#         ascii_rows.append(row_string)
-
-#     ascii_art = "\n".join(ascii_rows)
-#     print("Here is the ascii art:", ascii_art)
-
-#     return ascii_art
+        return ascii_art
