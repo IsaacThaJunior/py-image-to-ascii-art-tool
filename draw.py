@@ -18,9 +18,8 @@ class Image_To_Ascii:
         try:
             return Image.open(self.image_path)
 
-        except Exception as e:
-            print("An error occured here")
-            print("Error:", e)
+        except Exception:
+            raise Exception("An error occuredhere")
 
     def turn_image_to_greyscale_and_get_aspect_ratio(self):
         """
@@ -72,7 +71,6 @@ class Image_To_Ascii:
             # multiply the decimal value by the length of the charset to know which charset to use for each pixel
             # We are minusing 1 to accomodate the list indices when we start looping
             char_index = int(get_decimal_value * (charset_length - 1))
-            # print(pixel, get_decimal_value, self.charset[char_index], char_index)
 
             charset_to_use = self.charset[char_index]
             ascii_char.append(charset_to_use)
@@ -86,6 +84,6 @@ class Image_To_Ascii:
             ascii_rows.append(row_string)
 
         ascii_art = "\n".join(ascii_rows)
-        print(ascii_art)
+        
 
         return ascii_art
